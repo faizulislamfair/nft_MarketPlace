@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.8.1",
+    "axios": "^1.2.3",
     "ether": "^0.0.9",
     "framer-motion": "^8.4.3",
+    "ipfs-http-client": "^60.0.0",
     "next": "13.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

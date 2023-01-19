@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 // Import Icon
 import { MdNotifications } from 'react-icons/md';
 import { BsSearch } from 'react-icons/bs';
 import { CgMenuLeft, CgMenuRight } from 'react-icons/cg';
+import { useRouter } from "next/router";
 
 
 // Internal import
@@ -15,6 +16,12 @@ import { Button } from '../componentsindex';
 import images from '../../img';
 
 
+
+// Import From Smart Contract
+import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
+
+
+
 const NavBar = () => {
 
     const [discover, setDiscover] = useState(false);
@@ -22,6 +29,10 @@ const NavBar = () => {
     const [notification, setNotification] = useState(false);
     const [profile, setProfile] = useState(false);
     const [openSideMenu, setOpenSideMenu] = useState(false);
+
+    const router = useRouter();
+
+
 
     const openMenu = (e) => {
 
@@ -81,6 +92,11 @@ const NavBar = () => {
         }
     }
 
+
+    // Smart Contract Section
+    const { currentAccount, connectWallet, openError } = useContext(
+        NFTMarketplaceContext
+    );
 
 
     return (
@@ -153,7 +169,13 @@ const NavBar = () => {
 
                     {/* Button Section */}
                     <div className={Style.navbar_container_right_button}>
-                        <Button btnName="Create" handleClick={() => { }} />
+                        {currentAccount == "" ? (
+                            <Button btnName="Connect" handleClick={() => connectWallet()} />
+                        ) : (
+
+                            <Button btnName="Create"
+                                handleClick={() => router.push("/uploadNFT")} />
+                        )}
                     </div>
 
 
